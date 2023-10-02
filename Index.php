@@ -1,6 +1,11 @@
 <?php
-    $greenalert=false;
-    $error=false;
+
+function ShowAlert($type,$text){
+    echo"<div class='alert alert-$type  alert-dismissible fade show' role='alert'>
+        $text
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        </div>";
+}
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     include 'DbConnect.php';
     if(isset($_POST['Sighup'])){
@@ -15,14 +20,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         
         if($username==null || $email==null || $password==null || $cpassword==null || $password!=$cpassword){
             
-            $error=true;
+            ShowAlert("danger","Please Cheak Your Credentials..!");
         }
         else{
             
             $createuser="INSERT INTO `users` (`UserName`, `Email`, `Password`, `Date`) VALUES ('$username', '$email', '$password', current_timestamp())";
             $result=mysqli_query($con,$createuser);
             if($result){
-                $greenalert=true;
+            ShowAlert("success","Your Account Is Created Sucessfully Please Login Using Creadentials..!");
+                
             }
         }
 
@@ -53,21 +59,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 </head>
 
 <body>
-    <?php
-    if ($greenalert) {
-        echo'<div class="alert alert-success  alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> Your Account Is Created Sucessfully Please Login Using Creadentials..!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>';
-    }
-    if ($error) {
-        echo'<div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Error!</strong> Please Cheak Your Credentials..!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>';
-    }
-    
-?>
+
     <div class="box">
             <img class="logo" src="Img/logo.jpg" alt="logo">
             <h1 class="name animate__animated animate__lightSpeedInLeft">GIZMO</h1>
