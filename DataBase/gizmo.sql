@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2023 at 08:03 AM
+-- Generation Time: Oct 03, 2023 at 06:34 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -39,12 +39,34 @@ CREATE TABLE `order_maneger` (
 -- Dumping data for table `order_maneger`
 --
 
--- INSERT INTO `order_maneger` (`Order_Id`, `Full_Name`, `Address`, `Mobile_No`, `Pay_Mode`) VALUES
--- (4, 'Sneha Pathak', 'Chalisgaon, Jalgaon,424108', 7776087318, 'Pay On Delivery'),
--- (5, 'Yogesh Yadav', 'Talegaon, Chalisgaon, Jalgaon,424108', 5415445455, 'Pay Online'),
--- (6, 'Chetan Patil', 'Laxmi,Nagar Chalisgaon', 9566648448, 'Pay On Delivery'),
--- (7, 'Kunal Nikumbh', 'Hirapur Wala', 78965656565, 'Pay Online'),
--- (8, 'TulsiDas Khan', 'Mumbai', 9566648448, 'Pay On Delivery');
+INSERT INTO `order_maneger` (`Order_Id`, `Full_Name`, `Address`, `Mobile_No`, `Pay_Mode`) VALUES
+(9, 'Usha ManeshKar', 'odisha', 78787878787, 'Pay On Delivery');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `SrNo` int(11) NOT NULL,
+  `Name` varchar(20) NOT NULL,
+  `Email` varchar(25) NOT NULL,
+  `Password` varchar(20) NOT NULL,
+  `Date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`SrNo`, `Name`, `Email`, `Password`, `Date`) VALUES
+(1, 'Ayush', 'ayushpathak7776@gmail.com', '7776', '2023-10-02'),
+(17, 'Harshal', 'harshal@gmail.com', '7776', '2023-10-02'),
+(19, 'Pooja', 'pooja@gmail.com', '7776', '2023-10-03'),
+(20, 'Kriti', 'kritisanon@gmail.com', '7776', '2023-10-03'),
+(21, 'Hi', 'hi@this.com', '7776', '2023-10-03'),
+(22, 'Baburao', 'babubhai@gmail.com', '7776', '2023-10-03');
 
 -- --------------------------------------------------------
 
@@ -63,16 +85,8 @@ CREATE TABLE `user_orders` (
 -- Dumping data for table `user_orders`
 --
 
--- INSERT INTO `user_orders` (`Order_Id`, `Item_Name`, `Price`, `Quantity`) VALUES
--- (6, 'GizmoPhone', 21999, 1),
--- (6, 'GizmoWatch2', 19999, 1),
--- (7, 'GizmoEarebuds', 1499, 2),
--- (7, 'Gizmo Headphoes', 3999, 1),
--- (8, 'Gizmo Headphoes', 3999, 1),
--- (8, 'GizmoSpeker', 7999, 1),
--- (8, 'GizmoSmartTv', 39999, 1),
--- (8, 'GizmoEarebuds', 1499, 1),
--- (8, 'GizmoWatch2', 19999, 1);
+INSERT INTO `user_orders` (`Order_Id`, `Item_Name`, `Price`, `Quantity`) VALUES
+(9, 'GizmoEarebuds', 1499, 1);
 
 --
 -- Indexes for dumped tables
@@ -85,6 +99,13 @@ ALTER TABLE `order_maneger`
   ADD PRIMARY KEY (`Order_Id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`SrNo`),
+  ADD UNIQUE KEY `Email` (`Email`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -92,7 +113,13 @@ ALTER TABLE `order_maneger`
 -- AUTO_INCREMENT for table `order_maneger`
 --
 ALTER TABLE `order_maneger`
-  MODIFY `Order_Id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Order_Id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `SrNo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
