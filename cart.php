@@ -5,7 +5,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
   exit;
 }
 
-$name=$_SESSION['Name'];
+$mainname=$_SESSION['Name'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,13 +54,13 @@ $name=$_SESSION['Name'];
           </li>
           <li class="nav-item dropdown">
           <a class="nav-link navstyle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           Hello  <?php echo "$name";?>
+           Hello  <?php echo "$mainname";?>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="navstyle" href="#">Something else here</a></li>
-            <li><a class="dropdown-item " href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="Login.php">Logout</a></li>
+            <li><a class="dropdown-item" href="Logout.php">Logout</a></li>
           </ul>
         </li>
           <li class="nav-item">
@@ -79,10 +79,6 @@ $name=$_SESSION['Name'];
       </div>
     </div>
   </nav>
-
-
-
-
 
 
   <div class="container">

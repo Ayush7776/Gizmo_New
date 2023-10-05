@@ -8,7 +8,43 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 else{
   $loggedin=true;
 }
-$name=$_SESSION['Name'];
+$mainname=$_SESSION['Name'];
+function ShowAlert($type,$text){
+    echo"<div class='alert alert-$type  alert-dismissible fade show' role='alert'>
+    $text
+    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>";
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include "DbConnect.php";
+    if (isset($_POST["contact"])) {
+        $name = $_POST["name"];
+        $email = $_POST["email"];
+        $phone = $_POST["desc"];
+        $desc = $_POST["desc"];
+
+        if (
+            $name == null ||
+            $email == null ||
+            $phone == null ||
+            $desc == null
+        ) {
+            
+            ShowAlert("danger", "All Filed Are Mendetory..!");
+        } 
+        else{
+                $contactdata = "INSERT INTO `contact` (`Name`, `Email`, `Phone`, `Description`, `Time`) VALUES ('$name', '$email', '$phone', '$desc', current_timestamp());";
+                $result = mysqli_query($con, $contactdata);
+                if ($result) {
+                    ShowAlert(
+                        "success",
+                        "Your Respone Has Been Sent Our Team Will Contact You..!"
+                    );
+                }
+            }
+        }
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +64,7 @@ $name=$_SESSION['Name'];
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="Css/homestyle.css">
 </head>
-<title>Gizmo - Welcome <?php echo "$name";?></title>
+<title>Gizmo - Welcome <?php echo "$mainname";?></title>
 </head>
 
 <body>
@@ -58,7 +94,7 @@ $name=$_SESSION['Name'];
                   </li>
                           <li class="nav-item dropdown">
           <a class="nav-link navstyle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           Hello  <?php echo "$name";?>
+           Hello  <?php echo "$mainname";?>
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -414,32 +450,28 @@ $name=$_SESSION['Name'];
       </div>
     </div>
     <main class="form-signin w-100 m-auto container">
-      <form>
+      <form method="post" action="Home.php">
         <p id="contact" class="logoname float-none mb-5">Contact-Us</p>
         <!-- <img class="mb-4" src="Img/" alt="" width="72" height="57"> -->
         <!-- <h1 class="h3 mb-3 fw-normal">Contact Us</h1> -->
 
         <div class="form-floating my-3">
-          <input type="text" class="form-control" id="floatingName" placeholder="name@example.com">
+          <input name="name" type="text" class="form-control" id="floatingName">
           <label for="floatingInput">Name</label>
         </div>
         <div class="form-floating my-3">
-          <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+          <input name="email" type="email" class="form-control" id="floatingEmail" >
           <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating my-3">
-          <input type="number" class="form-control" id="floatingPhone" placeholder="name@example.com">
+          <input name="phone" type="number" class="form-control" id="floatingPhone">
           <label for="floatingInput">Phone</label>
         </div>
         <div class="form-floating my-3">
-          <textarea type="text" class="form-control" id="floatingtextarea" placeholder="textarea"></textarea>
+          <textarea name="desc" type="text" class="form-control" id="floatingtextarea" placeholder="textarea"></textarea>
           <label for="floatingtextarea">Write Your Query</label>
         </div>
-        <div class="form-floating my-3">
-          <input type="file" class="form-control " id="floatingfile" placeholder="File">
-          <label for="floatingFile">Upload Your Invoice</label>
-        </div>
-        <button class="w-50 btn btn-primary shopnow" type="submit">Send Query</button>
+        <button class="w-50 btn btn-primary shopnow" name="contact" type="submit">Send Query</button>
 
       </form>
     </main>

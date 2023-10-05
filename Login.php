@@ -1,10 +1,9 @@
 <?php
-
 function ShowAlert($type,$text){
     echo"<div class='alert alert-$type  alert-dismissible fade show' role='alert'>
-        $text
-        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-        </div>";
+    $text
+    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>";
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include "DbConnect.php";
@@ -78,6 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
